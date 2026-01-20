@@ -7,7 +7,7 @@ def _wrap_hash_markers(markdown: str) -> str:
     """Wrap bold spans and label prefixes with hash markers."""
 
     # Convert bold markdown **text** to # text #
-    markdown = re.sub(r"\*\*([^*]+)\*\*", r"# \1 #", markdown)
+    # markdown = re.sub(r"\*\*([^*]+)\*\*", r"# \1 #", markdown) #
 
     def wrap_line(line: str) -> str:
         stripped = line.strip()
@@ -48,7 +48,7 @@ def convert_docx_to_md(docx_file_path, output_dir='.'):
     """
     os.makedirs(output_dir, exist_ok=True)
 
-    markdown_text = docx2md.do_convert(docx_file_path, target_dir=output_dir)
+    markdown_text = docx2md.do_convert(docx_file_path, target_dir=output_dir, use_md_table=True)
 
     # Post-process to add hash markers
     markdown_text = _wrap_hash_markers(markdown_text)
@@ -63,4 +63,4 @@ def convert_docx_to_md(docx_file_path, output_dir='.'):
 
 
 if __name__ == "__main__":
-    convert_docx_to_md("Random_Patient_Discharge_Summary.docx", output_dir="output_folder")
+    convert_docx_to_md("Discharge_Summary_Text_and_Tables.docx", output_dir="output_folder")
